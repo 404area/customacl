@@ -22,8 +22,8 @@ dns:
     - https://doh.pub/dns-query
     - 223.5.5.5
   fallback:
-    - https://1.1.1.1/dns-query#HY2-US-warp
-    - https://8.8.8.8/dns-query#HY2-US-warp
+    - "https://1.1.1.1/dns-query#HY2-US-warp"
+    - "https://8.8.8.8/dns-query#HY2-US-warp"
   fallback-filter:
     geoip: true
     geoip-code: CN
