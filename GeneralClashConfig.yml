@@ -1,0 +1,38 @@
+; ==================== DNS 配置（国内优先加密 DoH） ====================
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  respect-rules: true                    # 必须开启，让 DNS 遵守 ACL4SSR 规则（苹果、微软、国内直连等）
+  default-nameserver:                    # 用于解析 DoH 域名、节点域名等，避免循环
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
+  nameserver:                            # 主要用于直连域名（国内）
+    - https://223.5.5.5/dns-query        # 阿里 IP DoH（推荐）
+    - https://dns.alidns.com/dns-query   # 阿里域名 DoH
+    - https://doh.pub/dns-query          # 腾讯 DoH
+    - 223.5.5.5                          # 纯 IP 兜底
+  fallback:                              # 用于代理域名（国外）
+    - https://1.1.1.1/dns-query          # Cloudflare IP DoH
+    - https://8.8.8.8/dns-query          # Google IP DoH
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+  fake-ip-filter:                        # 防止 iOS 和常见问题
+    - '*.lan'
+    - '*.local'
+    - time.apple.com
+    - captive.apple.com
+    - '*.apple.com'
+    - push.apple.com
+    - '*.icloud.com'
+    - dns.google
+    - dns.cloudflare.com
+    - doh.cleanbrowsing.org
+    - cleanbrowsing.org
+; ==================== DNS 配置结束 ====================
