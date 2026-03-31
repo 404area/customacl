@@ -1,3 +1,9 @@
+#==================== 基础设置 ====================
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 0.0.0.0:9090
 #==================== DNS 配置（国内优先加密 DoH） ====================
 dns:
   enable: true
